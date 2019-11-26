@@ -33,9 +33,9 @@ In both modes, commands can be written with their absolute path or simply their 
 
 ## **Return (Exit Value)**
 
-Upon termination of the simple shell program, an exit value will be set according to the last error encountered during operation. If no error was ever encountered, the exit value will be zero (0).
+Upon termination of the simple shell program, an exit value will be set according to the status of the last command executed. If no error was ever encountered, the exit value will be zero (0).
 
-Values that can be set are:
+If an error is found, values that can be set are:
 
 1 - Catchall for general errors
 
@@ -241,4 +241,3 @@ Ubuntu 14.04, Emacs, Vim, and C language.
 
 Daniel Alejandro Cumaco Robayo, Jhoan Stiven Zamora Caicedo
 
-# simple_shell
