@@ -74,6 +74,20 @@ or
     total 0
     test@ubuntu:~/simple_shell$
 
+## **Comments**
+
+Commands can be run with an extra parameter called a comment. This parameter is used for writing a descriptory text when executing. In order to use this option
+the user will have to add the character '#' after a command or its arguments with a trailing space:  
+
+Example:  
+
+    test@ubuntu:~/simple_shell$ ./hsh  
+    $ ls -l /tmp #This is a comment  
+    total 0  
+    $  
+
+Everything written after the character '#' will be ignored in the execution.
+
 ## **Built Ins**
 
 The simple shell has a set of commands that work like internal functions and don't require the search for any executable program.  

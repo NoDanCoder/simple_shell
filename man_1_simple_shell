@@ -115,6 +115,25 @@ total 0
 \fBvagrant@vagrant-ubuntu-trusty-64:~/simple_shell$\fR
 
 .TP
+\fBComments\fR
+
+Commands can be run with an extra parameter called a comment. This parameter is used for writing a descriptory text when executing. In order to use this option
+the user will have to add the character '#' after a command or its arguments with a trailing space:
+
+Example:
+
+\fBtest@ubuntu:~/simple_shell$\fR ./hsh
+
+$ ls -l /tmp \fB#This is a Comment\fR
+
+total 0
+
+$
+
+Everything written after the character '#' will be ignored in the execution.
+
+
+.TP
 \fBBuiltins\fR
 
 .RS
