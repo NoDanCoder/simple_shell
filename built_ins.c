@@ -113,7 +113,7 @@ ssize_t _unsetenv_cmd(hshpack *shpack)
 	else
 	{
 		shpack->exitnum[0] = 2;
-		write(2, "Please provide an argument\n", 21);
+		write(2, "Please provide an argument\n", 27);
 		return(free(shpack->options), -1);
 	}
 
