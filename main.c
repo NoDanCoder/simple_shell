@@ -23,7 +23,7 @@ int main(int ac, char **av, char **env)
 	ssize_t isBuiltIn;
 
 	if (ac > 1 || av == NULL || env == NULL)
-		write(2, "Please run with no arguments\n", 29), exit(9);
+		write(2, "Please run with no arguments\n", 29), exit(127);
 	signal(SIGINT, signal_handler);
 	sizeEnv = _strlendp(env);
 	env = _copydoublep(env, sizeEnv, sizeEnv);
