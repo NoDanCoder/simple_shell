@@ -102,9 +102,13 @@ ssize_t _setenv_cmd(hshpack *shpack)
 			value = shpack->options[2];
 
 	}
-
 	if (variable == 0)
-		return (_env_cmd(shpack));
+	{
+		write(2, "Invalid VARIABLE\n", 17);
+		shpack->exitnum[0] = 2;
+		free(shpack->options);
+		return (-1);
+	}
 
 	newenv = _setenv(*(shpack->envCpy), variable, value, shpack);
 
