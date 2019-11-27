@@ -14,17 +14,12 @@
  */
 char *auxcd2(hshpack *shpack, char *currdir)
 {
-	char *home, *dir;
+	char *home, *dir = NULL;
 
+	(void) currdir;
 	home = _getenv("HOME", *(shpack->envCpy));
 	if (home)
 		dir = home + 5;
-	else
-	{
-		write(2, "HOME env variable not set\n", 26);
-		free(shpack->options), free(currdir);
-		return (shpack->exitnum[0] = 2, NULL);
-	}
 
 	return (dir);
 }
@@ -83,7 +78,7 @@ ssize_t _cd_cmd(hshpack *shpack)
 	{
 		dir = auxcd2(shpack, currdir);
 		if (!dir)
-			return (-1);
+			return (free(shpack->options), free(currdir), 1);
 	}
 	else
 		if (!_strcmp(shpack->options[1], "-"))
