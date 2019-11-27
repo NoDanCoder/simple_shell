@@ -22,7 +22,7 @@ void help_exit(void)
 	_puts("exit: exit [n]\n");
 	_puts("    Exit the shell.\n\n");
 	_puts("    Exits the shell with a status of N.  ");
-	_puts("If N is omitted, the exit status\n");
+	_puts("    If N is omitted, the exit status\n");
 	_puts("    is that of the last command executed.\n");
 }
 /**
@@ -45,10 +45,10 @@ void help_setenv(void)
 {
 	_puts("setenv: setenv [VARIABLE] [VALUE]\n");
 	_puts("    Initializes a new environment variable, ");
-	_puts("or modifies an existing one.\n\n");
+	_puts("    or modifies an existing one.\n\n");
 	_puts("    VARIABLE must not have the character '='.\n");
 	_puts("    If no arguments are given, setenv prints ");
-	_puts("the current environment.\n");
+	_puts("    the current environment.\n");
 }
 
 
