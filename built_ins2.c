@@ -40,6 +40,13 @@ char *auxcd(hshpack *shpack, char *currdir)
 {
 	char *oldpwd2 = NULL, *oldpwd = NULL, *dir = NULL;
 
+	if (shpack->options[1] && shpack->options[2])
+	{
+		free(shpack->options);
+		free(currdir);
+		return (dir);
+	}
+
 	oldpwd2 = _strdup(_getenv("OLDPWD", *(shpack->envCpy)));
 	if (oldpwd2)
 		oldpwd = _strdup(oldpwd2 + 7), free(oldpwd2);
