@@ -110,6 +110,12 @@ ssize_t _unsetenv_cmd(hshpack *shpack)
 
 	if (shpack->options[1])
 		variable = shpack->options[1];
+	else
+	{
+		shpack->exitnum[0] = 2;
+		write(2, "Please provide an argument\n", 21);
+		return(free(shpack->options), -1);
+	}
 
 	if (variable == 0)
 	{
