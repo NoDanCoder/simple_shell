@@ -16,6 +16,7 @@
  * @run_able: check for running or not a command
  * @next: singly list link
  * @envCpy: copy of environment
+ * @unsetnull: check for setting environment to NULL
  *
  * Description: Struct containing important shell info
  *
@@ -33,6 +34,8 @@ typedef struct Hshpack
 	int *run_able;        /* 0 False 1 True (Is able to run)*/
 	struct Hshpack *next; /*adress of next cmd to run */
 	char ***envCpy;       /* current environment */
+	int *unsetnull;       /*check for setting environment to NULL */
+
 } hshpack;
 
 /**
@@ -83,7 +86,7 @@ int _strlendp(char **s);
 char **checkInput(int ac, char **av, size_t *bufsize,
 		  char **buffer, hshpack *shpack);
 hshpack *set_struct(char *argv0, int *errn, int *exnum, int *relation,
-		    int *run_able, char ***env);
+		    int *run_able, char ***env, int *unsetnull);
 int _error(int errn, hshpack *shpack, int exnum);
 void addCmd(hshpack *shpack, char *buffer, char *command, char **parameters);
 void addPathToCmd(hshpack *shpack, char *pathCmd);

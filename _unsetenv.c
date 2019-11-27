@@ -56,14 +56,11 @@ char **_unsetenv(char **env, char *variable, hshpack *shpack)
 	int i, j, check, l = 0, lenv = 0, found = 0;
 	char **copy;
 
+	shpack->unsetnull[0] = 0;
 	if (!env)
-	{
-		write(2, "Environment is NULL\n", 20);
-		return (NULL);
-	}
+		return (write(2, "Environment is NULL\n", 20), NULL);
 	if (_strlen(variable) == 0 || variable == 0)
 		return (_error(3, shpack, 1), NULL);
-
 	l = _strlen(variable), lenv = _strlendp(env);
 	for (i = 0; env[i] != 0; i++)
 	{
@@ -78,19 +75,19 @@ char **_unsetenv(char **env, char *variable, hshpack *shpack)
 		{
 			/* Found env to erase */
 			found = 1;
-			copy = _copydoublepDel(env, lenv - 1, i), free_doubpoint(env);
-			if (copy == 0)
-				return (_error(7, shpack, 1), NULL);
-			env = copy;
+			if ((lenv - 1) != 0)
+			{
+				copy = _copydoublepDel(env, lenv - 1, i);
+				if (copy == 0)
+					return (_error(7, shpack, 1), NULL);
+			}
+			else
+				shpack->unsetnull[0] = 1, copy = NULL;
+			free_doubpoint(env), env = copy;
 			return (env);
 		}
 	}
-
 	if (found == 0)
-	{
-		write(2, "VARIABLE not found\n", 19);
-		return (NULL);
-	}
-
+		return (write(2, "VARIABLE not found\n", 19), NULL);
 	return (env);
 }

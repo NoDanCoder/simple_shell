@@ -146,7 +146,7 @@ ssize_t _unsetenv_cmd(hshpack *shpack)
 
 	newenv = _unsetenv(*(shpack->envCpy), variable, shpack);
 
-	if (newenv == 0)
+	if (newenv == 0 && shpack->unsetnull[0] == 0)
 	{
 		free(shpack->options);
 		shpack->exitnum[0] = 2;

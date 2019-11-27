@@ -19,7 +19,7 @@ int main(int ac, char **av, char **env)
 	size_t bufsize = 0;
 	char **command, *pathCmd, *buffer = NULL;
 	hshpack *shpack;
-	int errn = 0, exnum = 0, relation = 0, run_able = 0, sizeEnv;
+	int errn = 0, exnum = 0, relation = 0, run_able = 0, sizeEnv, enul = 0;
 	ssize_t isBuiltIn;
 
 	if (ac > 1 || av == NULL)
@@ -27,7 +27,7 @@ int main(int ac, char **av, char **env)
 	signal(SIGINT, signal_handler);
 	sizeEnv = _strlendp(env);
 	env = _copydoublep(env, sizeEnv, sizeEnv);
-	shpack = set_struct(av[0], &errn, &exnum, &relation, &run_able, &env);
+	shpack = set_struct(av[0], &errn, &exnum, &relation, &run_able, &env, &enul);
 	while (1)
 	{
 		command = NULL;
@@ -65,12 +65,13 @@ int main(int ac, char **av, char **env)
  * @relation: relation for logical operators
  * @run_able: if cmd should be run
  * @env: current environment
+ * @unsetnull: check for setting environment to NULL
  *
  * Return: Pointer to struct
  *
  */
 hshpack *set_struct(char *argv0, int *errn, int *exnum,
-		    int *relation, int *run_able, char ***env)
+		    int *relation, int *run_able, char ***env, int *unsetnull)
 {
 	hshpack *shellpack;
 
@@ -87,6 +88,7 @@ hshpack *set_struct(char *argv0, int *errn, int *exnum,
 	shellpack->relation = relation;
 	shellpack->run_able = run_able;
 	shellpack->envCpy = env;
+	shellpack->unsetnull = unsetnull;
 
 	return (shellpack);
 }
