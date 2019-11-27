@@ -53,7 +53,7 @@ typedef struct b_ins
 } b_ins;
 
 /**
- * struct helps - struct for built ins
+ * struct Helps - struct for built ins
  * @built: built in command
  * @h: help function of built in
  *

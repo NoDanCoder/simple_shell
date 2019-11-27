@@ -38,7 +38,7 @@ int executeCmd(char *program, char *command[], char **env, hshpack *shpack)
 		execveSts = execve(program, command, env);
 		if (execveSts == -1)
 		{
-			exit(-1);
+			_exit(-1);
 		}
 	}
 	else
