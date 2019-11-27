@@ -37,6 +37,9 @@ char **_copydoublep(char **p, int old_size, int new_size)
 	char **copy;
 	int i, csize;
 
+	if (!p)
+		return (NULL);
+
 	if (new_size < old_size)
 	{
 		csize = new_size;

@@ -35,7 +35,8 @@ char **checkInput(int ac, char **av, size_t *bufsize,
 		{
 			exitnum = shpack->exitnum[0];
 			free(*buffer);
-			free_doubpoint(*(shpack->envCpy));
+			if (*(shpack->envCpy))
+				free_doubpoint(*(shpack->envCpy));
 			free(shpack);
 			if (isatty(STDIN_FILENO))
 				write(1, "\n", 1);

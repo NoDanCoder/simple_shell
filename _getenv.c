@@ -15,6 +15,9 @@ char *_getenv(const char *name, char **env)
 {
 	int i, j, check, l = 0;
 
+	if (!env)
+		return (NULL);
+
 	while (name[l] != 0)
 		l++;
 
@@ -27,5 +30,5 @@ char *_getenv(const char *name, char **env)
 			return (env[i]);
 	}
 
-	return (0);
+	return (NULL);
 }

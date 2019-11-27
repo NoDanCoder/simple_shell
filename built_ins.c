@@ -27,7 +27,8 @@ ssize_t _exit_cmd(hshpack *shpack)
 				valueToExit = shpack->exitnum[0];
 			free(*(shpack->options));
 			free(shpack->options);
-			free_doubpoint(*(shpack->envCpy));
+			if (*(shpack->envCpy))
+				free_doubpoint(*(shpack->envCpy));
 			free(shpack);
 			exit(valueToExit);
 		}
@@ -48,10 +49,11 @@ ssize_t _env_cmd(hshpack *shpack)
 	char **str;
 	int check = 1;
 
-	if (shpack->envCpy == NULL)
+	if (*(shpack->envCpy) == NULL)
 	{
 		write(2, "Environment is Null, Can't Print it\n", 36);
 		shpack->exitnum[0] = 2;
+		free(shpack->options);
 		return (-1);
 	}
 
@@ -59,7 +61,7 @@ ssize_t _env_cmd(hshpack *shpack)
 
 	if (shpack->options[1] == NULL)
 	{
-		for (;str && *str; str++)
+		for (; str && *str; str++)
 		{
 			write(1, *str, _strlen(*str));
 			write(1, "\n", 1);
@@ -124,7 +126,7 @@ ssize_t _unsetenv_cmd(hshpack *shpack)
 	{
 		shpack->exitnum[0] = 2;
 		write(2, "Please provide an argument\n", 27);
-		return(free(shpack->options), -1);
+		return (free(shpack->options), -1);
 	}
 
 	if (variable == 0)
