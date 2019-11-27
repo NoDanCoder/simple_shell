@@ -22,7 +22,7 @@ int main(int ac, char **av, char **env)
 	int errn = 0, exnum = 0, relation = 0, run_able = 0, sizeEnv;
 	ssize_t isBuiltIn;
 
-	if (ac > 1 || av == NULL || env == NULL)
+	if (ac > 1 || av == NULL)
 		write(2, "Please run with no arguments\n", 29), exit(127);
 	signal(SIGINT, signal_handler);
 	sizeEnv = _strlendp(env);
