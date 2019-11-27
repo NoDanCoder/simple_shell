@@ -48,8 +48,7 @@ ssize_t _env_cmd(hshpack *shpack)
 {
 
 	char **str = *(shpack->envCpy);
-	int size = _strlendp(str), check = 1;
-	(void) size;
+	int check = 1;
 
 	if (shpack->options[1] == NULL)
 		for (; *str; str++)

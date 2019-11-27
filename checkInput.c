@@ -42,9 +42,12 @@ char **checkInput(int ac, char **av, size_t *bufsize,
 				write(1, "\n", 1);
 			exit(exitnum);
 		}
-		else if (!characters || **buffer == '\n')
+		if (**buffer == '#')
 			return (NULL);
-		*buffer = _strtok(*buffer, "#");
+		else
+			*buffer = _strtok(*buffer, "#");
+		if (!characters || **buffer == '\n')
+			return (NULL);
 		command = getParameters(*buffer, shpack);
 	}
 	else
