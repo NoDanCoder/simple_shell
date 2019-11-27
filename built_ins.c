@@ -91,7 +91,16 @@ ssize_t _setenv_cmd(hshpack *shpack)
 	if (shpack->options[1])
 	{
 		variable = shpack->options[1];
-		value = shpack->options[2];
+		if (!shpack->options[2])
+		{
+			write(2, "Invalid VALUE\n", 14);
+			shpack->exitnum[0] = 2;
+			free(shpack->options);
+			return (-1);
+		}
+		else
+			value = shpack->options[2];
+
 	}
 
 	if (variable == 0)
