@@ -111,4 +111,6 @@ void help_unsetenv(void);
 void help_cd(void);
 void help_help(void);
 void help_alias(void);
+void printsHelp(void);
+
 #endif
