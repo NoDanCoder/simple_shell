@@ -49,9 +49,9 @@ char *auxcd(hshpack *shpack, char *currdir)
 		oldpwd = _strdup(oldpwd2 + 7), free(oldpwd2);
 	if (!oldpwd2)
 	{
-		write(2, "OLDPWD env variable not set\n", 28);
-		free(oldpwd), free(shpack->options), free(currdir);
-		return (shpack->exitnum[0] = 2, NULL);
+		/* write(2, "OLDPWD env variable not set\n", 28); */
+		/* free(oldpwd), free(shpack->options), free(currdir); */
+		/* return (shpack->exitnum[0] = 2, NULL); */
 	}
 
 	dir = oldpwd;
@@ -85,7 +85,7 @@ ssize_t _cd_cmd(hshpack *shpack)
 		{
 			dir = auxcd(shpack, currdir);
 			if (!dir)
-				return (-1);
+				return (free(shpack->options), free(currdir), 1);
 			checkminus = 1;
 		}
 		else
