@@ -46,16 +46,26 @@ ssize_t _exit_cmd(hshpack *shpack)
  */
 ssize_t _env_cmd(hshpack *shpack)
 {
-
-	char **str = *(shpack->envCpy);
+	char **str;
 	int check = 1;
 
+	if (shpack->envCpy == NULL)
+	{
+		write(2, "Environment is Null, Can't Print it\n", 36);
+		shpack->exitnum[0] = 2;
+		return (-1);
+	}
+
+	str = *(shpack->envCpy);
+
 	if (shpack->options[1] == NULL)
-		for (; *str; str++)
+	{
+		for (;str && *str; str++)
 		{
 			write(1, *str, _strlen(*str));
 			write(1, "\n", 1);
 		}
+	}
 	else
 	{
 		_error(0, shpack, 2);
