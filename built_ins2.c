@@ -66,7 +66,7 @@ ssize_t _cd_cmd(hshpack *shpack)
 	char *currdir = NULL, *dir = NULL, **newenv, *oldpwd = NULL;
 	int exit = 1, check = 1, checkminus = 0;
 
-	currdir = getcwd(NULL, 100);
+	currdir = getcwd(NULL, 4096);
 	if (shpack->options[1])
 	{
 		if (!_strcmp(shpack->options[1], "-"))
