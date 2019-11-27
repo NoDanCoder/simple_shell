@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "shell.h"
 
 /**
@@ -52,7 +53,7 @@ char **_copydoublepDel(char **p, int new_size, int jump)
  */
 char **_unsetenv(char **env, char *variable, hshpack *shpack)
 {
-	int i, j, check, l = 0, lenv = 0;
+	int i, j, check, l = 0, lenv = 0, found = 0;
 	char **copy;
 
 	if (_strlen(variable) == 0 || variable == 0)
@@ -71,6 +72,7 @@ char **_unsetenv(char **env, char *variable, hshpack *shpack)
 		if (check == l && env[i][check] == '=')
 		{
 			/* Found env to erase */
+			found = 1;
 			copy = _copydoublepDel(env, lenv - 1, i), free_doubpoint(env);
 			if (copy == 0)
 				return (_error(7, shpack, 1), NULL);
@@ -78,5 +80,12 @@ char **_unsetenv(char **env, char *variable, hshpack *shpack)
 			return (env);
 		}
 	}
+
+	if (found == 0)
+	{
+		write(2, "VARIABLE not found\n", 19);
+		return (NULL);
+	}
+
 	return (env);
 }
