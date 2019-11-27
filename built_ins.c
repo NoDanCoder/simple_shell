@@ -28,7 +28,6 @@ ssize_t _exit_cmd(hshpack *shpack)
 			free(*(shpack->options));
 			free(shpack->options);
 			free_doubpoint(*(shpack->envCpy));
-			free(shpack->prevcd);
 			free(shpack);
 			exit(valueToExit);
 		}

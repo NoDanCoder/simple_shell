@@ -73,7 +73,6 @@ hshpack *set_struct(char *argv0, int *errn, int *exnum,
 		    int *relation, int *run_able, char ***env)
 {
 	hshpack *shellpack;
-	char *home, *home2;
 
 	shellpack = malloc(sizeof(struct Hshpack));
 	if (shellpack == 0)
@@ -88,10 +87,7 @@ hshpack *set_struct(char *argv0, int *errn, int *exnum,
 	shellpack->relation = relation;
 	shellpack->run_able = run_able;
 	shellpack->envCpy = env;
-	home2 = _strdup(_getenv("HOME", *env));
-	if (home2)
-		home = _strdup(home2 + 5), free(home2);
-	shellpack->prevcd = home;
+
 	return (shellpack);
 }
 /**
