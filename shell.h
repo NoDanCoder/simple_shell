@@ -102,6 +102,7 @@ char **_unsetenv(char **env, char *variable, hshpack *shpack);
 int _isdigit(int c);
 int _isnumber(char *s);
 ssize_t _cd_cmd(hshpack *shpack);
+char *deleteComment(char *str);
 
 
 ssize_t _help_cmd(hshpack *shpack);

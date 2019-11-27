@@ -42,12 +42,9 @@ char **checkInput(int ac, char **av, size_t *bufsize,
 				write(1, "\n", 1);
 			exit(exitnum);
 		}
-		if (**buffer == '#')
+		if (**buffer == '#' || !characters || **buffer == '\n')
 			return (NULL);
-		else
-			*buffer = _strtok(*buffer, "#");
-		if (!characters || **buffer == '\n')
-			return (NULL);
+		*buffer = deleteComment(*buffer);
 		command = getParameters(*buffer, shpack);
 	}
 	else
@@ -64,4 +61,26 @@ char **checkInput(int ac, char **av, size_t *bufsize,
 			command[ac - 1] = av[ac];
 	}
 	return (command);
+}
+
+/**
+ * deleteComment - deletes a commnet inside a command line
+ *
+ * @str: string to operate
+ *
+ * Return: pointer to string
+ *
+ */
+char *deleteComment(char *str)
+{
+	char *org = str;
+
+	for (; str && *str; str++)
+		if (*str == '#' && *(str - 1) == ' ')
+		{
+			*str = '\0';
+			break;
+		}
+
+	return (org);
 }
