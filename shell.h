@@ -16,7 +16,6 @@
  * @run_able: check for running or not a command
  * @next: singly list link
  * @envCpy: copy of environment
- * @prevcd: previous workind dir for cd -
  *
  * Description: Struct containing important shell info
  *
@@ -34,7 +33,6 @@ typedef struct Hshpack
 	int *run_able;        /* 0 False 1 True (Is able to run)*/
 	struct Hshpack *next; /*adress of next cmd to run */
 	char ***envCpy;       /* current environment */
-
 } hshpack;
 
 /**
