@@ -34,7 +34,6 @@ typedef struct Hshpack
 	int *run_able;        /* 0 False 1 True (Is able to run)*/
 	struct Hshpack *next; /*adress of next cmd to run */
 	char ***envCpy;       /* current environment */
-	char *prevcd;        /* previous working dir */
 
 } hshpack;
 
