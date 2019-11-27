@@ -43,6 +43,7 @@ char *auxcd(hshpack *shpack, char *currdir)
 	if (shpack->options[1] && shpack->options[2])
 	{
 		write(2, "cd: too many arguments\n", 23);
+		shpack->exitnum[0] = 2;
 		free(shpack->options);
 		free(currdir);
 		return (dir);
