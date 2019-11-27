@@ -82,6 +82,10 @@ ssize_t _help_cmd(hshpack *shpack)
 	}
 	if (shpack->options[1] == NULL)
 	{
+		_puts("Shell HSH, version 1.0(1)-release (x86_64-pc-linux-gnu)\n");
+		_puts("These shell commands are defined internally.\n");
+		_puts("Type `help' to see this list.\n");
+		_puts("Type help  'BUILTIN'' to find out more about the function 'BUILTIN'.\n");
 		bcheck = 1;
 		_puts("exit [n]\n");
 		_puts("env\n");
