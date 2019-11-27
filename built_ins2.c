@@ -67,6 +67,8 @@ ssize_t _cd_cmd(hshpack *shpack)
 	int exit = 1, check = 1, checkminus = 0;
 
 	currdir = getcwd(NULL, 4096);
+	if (!currdir)
+		_error(4, shpack, 2), exit(2);
 	if (!shpack->options[1] ||
 			(shpack->options[1] && (!_strcmp(shpack->options[1], "~"))))
 	{
@@ -75,7 +77,6 @@ ssize_t _cd_cmd(hshpack *shpack)
 			return (-1);
 	}
 	else if (shpack->options[1])
-	{
 		if (!_strcmp(shpack->options[1], "-"))
 		{
 			dir = auxcd(shpack, currdir);
@@ -85,7 +86,6 @@ ssize_t _cd_cmd(hshpack *shpack)
 		}
 		else
 			dir = shpack->options[1];
-	}
 	if (dir)
 		check = chdir(dir);
 	if (check == 0 && checkminus == 1)
