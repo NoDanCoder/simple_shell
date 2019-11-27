@@ -56,6 +56,11 @@ char **_unsetenv(char **env, char *variable, hshpack *shpack)
 	int i, j, check, l = 0, lenv = 0, found = 0;
 	char **copy;
 
+	if (!env)
+	{
+		write(2, "Environment is NULL\n", 20);
+		return (NULL);
+	}
 	if (_strlen(variable) == 0 || variable == 0)
 		return (_error(3, shpack, 1), NULL);
 

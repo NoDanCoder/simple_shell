@@ -37,7 +37,7 @@ char **_copydoublep(char **p, int old_size, int new_size)
 	char **copy;
 	int i, csize;
 
-	if (!p)
+	if (!p && (old_size == new_size))
 		return (NULL);
 
 	if (new_size < old_size)
@@ -53,18 +53,19 @@ char **_copydoublep(char **p, int old_size, int new_size)
 	if (copy == 0)
 		return (0);
 
-	for (i = 0; i < csize; i++)
-	{
-		copy[i] = _strdup(p[i]);
-		if (copy[i] == 0)
+	if (p)
+		for (i = 0; i < csize; i++)
 		{
-			i--;
-			for (; i >= 0; i--)
-				free(copy[i]);
-			free(copy);
-			return (0);
+			copy[i] = _strdup(p[i]);
+			if (copy[i] == 0)
+			{
+				i--;
+				for (; i >= 0; i--)
+					free(copy[i]);
+				free(copy);
+				return (0);
+			}
 		}
-	}
 
 	/* Add Null in the end */
 	copy[new_size] = '\0';
@@ -81,6 +82,9 @@ char **_copydoublep(char **p, int old_size, int new_size)
 int _strlendp(char **s)
 {
 	int i = 0;
+
+	if (!s)
+		return (0);
 
 	while (s[i] != NULL)
 		i++;
@@ -110,7 +114,7 @@ char **_setenv(char **env, char *variable, char *value, hshpack *shpack)
 	if (envjoin == 0)
 		return (_error(3, shpack, 1), NULL);
 	l = _strlen(variable), lenv = _strlendp(env);
-	for (i = 0; env[i] != 0; i++)
+	for (i = 0; env && env[i] != 0; i++)
 	{
 		for (check = 0, j = 0; j < l && env[i][j] != 0; j++)
 		{
@@ -124,16 +128,16 @@ char **_setenv(char **env, char *variable, char *value, hshpack *shpack)
 			free(env[i]), copydup = _strdup(envjoin), free(envjoin);
 			if (copydup == 0)
 				return (_error(3, shpack, 1), NULL);
-			env[i] = copydup;
-			return (env);
+			return (env[i] = copydup, env);
 		}
 	}
-	copy = _copydoublep(env, lenv, lenv + 1), free_doubpoint(env);
+	copy = _copydoublep(env, lenv, lenv + 1);
+	if (env)
+		free_doubpoint(env);
 	if (copy == 0)
 		return (free(envjoin), _error(3, shpack, 1), NULL);
 	env = copy, copydup = _strdup(envjoin), free(envjoin);
 	if (copydup == 0)
 		return (_error(3, shpack, 1), NULL);
-	env[lenv] = copydup;
-	return (env);
+	return (env[lenv] = copydup, env);
 }
