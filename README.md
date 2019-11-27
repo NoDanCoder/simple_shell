@@ -137,7 +137,7 @@ The main code of the shell
 
 Functions for checking and executing built ins
 
-> built_ins.c / built_ins2.c / built_ins3.c /_setenv.c / _unsetenv.c / _getenv.c
+> built_ins#.c / help#.c /_setenv.c / _unsetenv.c / _getenv.c
 
 Functions for checking the input and obtaining parameters
 
